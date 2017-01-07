@@ -4,6 +4,17 @@ function [Output, Neural_Network_IOs] = Feedforward_Process(Input,Network_Struct
 % side are included in future plans due to the current poor compatibility
 % of MATLAB (R2016a) and PASCAL series GPUs (with CUDA 7.5 or CUDA 8.0).
 
+% Size check
+% <Problem>:
+%   Weight_Matrix.HiddenToHidden do not exist when there is only one hidden
+% layer.
+if(Check((Network_Structure.InputSize+1), size(Weight_Matrix.InputToHidden,1), 0) || ...
+        Check(Network_Structure.HiddenSize, size(Weight_Matrix.HiddenToHidden,1), 0) || ...
+        Check((Network_Structure.HiddenLayerNum-1), size(Weight_Matrix.HiddenToHidden,3), 0) || ...
+        Check(Network_Structure.OutputSize, size(Weight_Matrix.HiddenToOutput,2), 0))
+    error(' Uncorrect Neural Network Size! Please Check the last two input of function Feedforward_Process().');
+end
+
 % Designate activation method
 activation_function = 'tanh';
 
