@@ -7,7 +7,7 @@ function [Weight_Matrix] = Weight_Matrix_Initialization(Network_Structure)
 eps = 1;
 
 % Initialize link weight matrix between input layer and hidden layer
-Weight_Matrix.InputToHidden = rand((Network_Structure.InputSize+1), (Network_Structure.HiddenSize-1)) * (2*eps) - eps; % Note that there is no link between input layer and the bias unit in hidden layer
+Weight_Matrix.InputToHidden = rand((Network_Structure.InputSize), (Network_Structure.HiddenSize-1)) * (2*eps) - eps; % Note that there is no link between input layer and the bias unit in hidden layer
 
 % Initialize link weight matrix between hidden layers
 if(Network_Structure.HiddenLayerNum > 1)
